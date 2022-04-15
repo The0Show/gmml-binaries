@@ -1,6 +1,6 @@
-# gmml-binaries
+# gmml-prebuilt
 
-Prebuilt binaries of [GMML](https://github.com/cgytrus/gmml).
+Prebuilt versions of [GMML](https://github.com/cgytrus/gmml).
 
 Releases are posted using an automated script that checks for new commits to the GMML repository every hour.
 

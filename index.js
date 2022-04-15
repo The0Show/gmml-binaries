@@ -10,7 +10,7 @@ const token = process.env.GITHUB_TOKEN;
 
 const repo = {
     owner: "The0Show",
-    name: "gmml-binaries",
+    name: "gmml-prebuilt",
 };
 
 async function checkForNewBuilds() {
