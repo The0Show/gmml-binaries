@@ -15,6 +15,7 @@ const repo = {
 
 async function checkForNewBuilds() {
     console.clear();
+    console.log(Date.now());
     
     const commitLog = await axios
         .get(`https://api.github.com/repos/cgytrus/gmml/commits`)
