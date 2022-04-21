@@ -69,7 +69,7 @@ async function checkForNewBuilds() {
                         repo: repo.name,
                         tag_name: Date.now().toString(),
                         name: `Build #${Date.now()}`,
-                        body: `Build output for the latest commits to [GMML](https://github.com/cgytrus/gmml).\nBuilt on ${today}`,
+                        body: `Build output for the latest commits to [GMML](https://github.com/cgytrus/gmml).\n\nBuilt on ${today}`,
                     });
 
                     await putasset(token, {
@@ -94,7 +94,7 @@ async function checkForNewBuilds() {
 
                 // append files from a sub-directory and naming it `new-subdir` within the archive
                 archive.directory(
-                    "gmml/GmmlPatcher/bin/Release/net6.0/gmml-final",
+                    "gmml/GmmlPatcher/bin/win-x64-net6.0/Release",
                     false
                 );
 
