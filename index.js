@@ -22,14 +22,14 @@ async function checkForNewBuilds() {
         .then((res) => res.data);
 
     if (!fs.existsSync("buildCount.txt"))
-        fs.writeFileSync("buildCount.txt", "0");
-    const builtNum = parseInt(fs.readFileSync("buildCount.txt").toString());
+        fs.writeFileSync("buildCount.txt", "");
+    const builtNum = fs.readFileSync("buildCount.txt").toString();
 
-    console.log("commit count: ", commitLog.length);
+    console.log("commit sha: ", commitLog[0].sha);
     console.log("built commit: ", builtNum);
 
-    if (commitLog.length > builtNum) {
-        fs.writeFileSync("buildCount.txt", commitLog.length.toString());
+    if (commitLog[0].sha != builtNum) {
+        fs.writeFileSync("buildCount.txt", commitLog[0].sha);
 
         console.log("changes detected: starting build");
 
@@ -56,15 +56,20 @@ async function checkForNewBuilds() {
                     const octokit = new Octokit({
                         auth: `token ${token}`,
                     });
+					
+					var today = new Date();
+					var dd = String(today.getDate()).padStart(2, '0');
+					var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+					var yyyy = today.getFullYear();
+
+					today = mm + '/' + dd + '/' + yyyy;
 
                     await octokit.repos.createRelease({
                         owner: repo.owner,
                         repo: repo.name,
-                        tag_name: commitLog.length.toString(),
-                        name: `Commits ${builtNum} to ${commitLog.length}`,
-                        body: `Build output for the previous ${
-                            commitLog.length - builtNum
-                        } commits to [GMML](https://github.com/cgytrus/gmml).`,
+                        tag_name: Date.now().toString(),
+                        name: `Build #${Date.now()}`,
+                        body: `Build output for the latest commits to [GMML](https://github.com/cgytrus/gmml).\nBuilt on ${today}`,
                     });
 
                     await putasset(token, {
