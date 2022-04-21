@@ -39,7 +39,7 @@ async function checkForNewBuilds() {
                 return;
             }
             console.log("build completed");
-            if (!fs.existsSync("gmml/GmmlPatcher/bin/Release")) {
+            if (!fs.existsSync("gmml/GmmlPatcher/bin/win-x64-net6.0/Release")) {
                 console.log(
                     "could not find build folder - build may have failed"
                 );
