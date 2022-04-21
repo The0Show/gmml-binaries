@@ -96,7 +96,7 @@ async function checkForNewBuilds() {
 
                 // append files from a sub-directory and naming it `new-subdir` within the archive
                 archive.directory(
-                    "",
+                    buildPath,
                     false
                 );
 
