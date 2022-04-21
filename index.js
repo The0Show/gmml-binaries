@@ -13,6 +13,8 @@ const repo = {
     name: "gmml-prebuilt",
 };
 
+const buildPath = "gmml/GmmlPatcher/bin/win-x64-net6.0/Release";
+
 async function checkForNewBuilds() {
     console.clear();
     console.log(Date.now());
@@ -39,7 +41,7 @@ async function checkForNewBuilds() {
                 return;
             }
             console.log("build completed");
-            if (!fs.existsSync("gmml/GmmlPatcher/bin/win-x64-net6.0/Release")) {
+            if (!fs.existsSync(buildPath)) {
                 console.log(
                     "could not find build folder - build may have failed"
                 );
@@ -75,7 +77,7 @@ async function checkForNewBuilds() {
                     await putasset(token, {
                         owner: repo.owner,
                         repo: repo.name,
-                        tag: commitLog.length.toString(),
+                        tag: Date.now().toString(),
                         filename: "gmml.zip",
                     })
                         .then((url) => {
@@ -94,7 +96,7 @@ async function checkForNewBuilds() {
 
                 // append files from a sub-directory and naming it `new-subdir` within the archive
                 archive.directory(
-                    "gmml/GmmlPatcher/bin/win-x64-net6.0/Release",
+                    "",
                     false
                 );
 
