@@ -59,17 +59,19 @@ async function checkForNewBuilds() {
                         auth: `token ${token}`,
                     });
 					
-					var today = new Date();
-					var dd = String(today.getDate()).padStart(2, '0');
-					var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-					var yyyy = today.getFullYear();
+                    var today = new Date();
+                    var dd = String(today.getDate()).padStart(2, '0');
+                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                    var yyyy = today.getFullYear();
 
 					today = mm + '/' + dd + '/' + yyyy;
+					
+					let buildTag = Date.now().toString()
 
                     await octokit.repos.createRelease({
                         owner: repo.owner,
                         repo: repo.name,
-                        tag_name: Date.now().toString(),
+                        tag_name: buildTag,
                         name: `Build #${Date.now()}`,
                         body: `Build output for the latest commits to [GMML](https://github.com/cgytrus/gmml).\n\nBuilt on ${today}`,
                     });
@@ -77,7 +79,7 @@ async function checkForNewBuilds() {
                     await putasset(token, {
                         owner: repo.owner,
                         repo: repo.name,
-                        tag: Date.now().toString(),
+                        tag: buildTag,
                         filename: "gmml.zip",
                     })
                         .then((url) => {
