@@ -1,3 +1,5 @@
+This repository is no longer needed due to a [recent commit to GMML](https://github.com/cgytrus/gmml/commit/08a7200fda29b72e600d2aa0f5dddb03bc1f53a5).
+<hr>
 # gmml-prebuilt
 
 Prebuilt versions of [GMML](https://github.com/cgytrus/gmml).
